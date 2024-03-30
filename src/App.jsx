@@ -1,11 +1,20 @@
 import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Layout from './components/pages/Layout';
+import AllBooks from './components/pages/AllBooks';
+import Page from './components/pages/Page';
 
 function App() {
 
   return (
-    <>
-      <h1 className='text-8xl font-extrabold'>Hello World</h1>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Layout/>}>
+          <Route index element={<AllBooks/>}/>
+          <Route path='Page' element={<Page/>}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
