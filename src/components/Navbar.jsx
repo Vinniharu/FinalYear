@@ -7,13 +7,13 @@ const Navbar = (props) => {
   const [isOpened, setIsOpened] = useState(false);
 
   const closeSidebarHandler = () => {
-    setIsOpened(!isOpened)
+    setIsOpened(!isOpened);
 
-    props.onClick(isOpened)
-  }
+    props.onClick(isOpened);
+  };
 
   return (
-    <div className="box-border p-4 bg-[#0E1C36] text-white h-[10vh] flex items-center justify-between">
+    <div className="box-border p-4 bg-[#0E1C36] w-full text-white h-[10vh] flex items-center justify-between">
       <div>
         <Link to={"/"}>
           <h1 className="text-3xl font-extrabold">StudyHere</h1>

@@ -13,7 +13,7 @@ const Layout = () => {
   return (
     <div>
       <Navbar onClick={onCloseSidebar} />
-      <div className="flex items-center relative w-[100vw] justify-start h-[90vh] overflow-x-hidden">
+      <div className="flex items-center relative box-border w-full justify-start h-fit overflow-x-hidden mt-4 mb-[2rem]">
         <Sidebar onClick={sidebarControl} />
         <Outlet />
       </div>

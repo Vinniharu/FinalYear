@@ -24,7 +24,7 @@ const AllBooks = () => {
   }, []);
 
   return (
-    <div className="w-[100vw] absolute top-0">
+    <div className="w-full box-border">
       {loading ? (
         <div className="fixed bg-white top-0 w-full h-[100vh] flex items-center justify-center">
           <InfinitySpin
