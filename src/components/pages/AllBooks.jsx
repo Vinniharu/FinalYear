@@ -44,7 +44,7 @@ const AllBooks = () => {
       ) : (
         <div>
           <Navbar onClick={onCloseSidebar} />
-          <div className="relative">
+          <div>
             <Sidebar onClick={sidebarControl} />
             <div className="overflow-auto">
               {books.map((book) => (
