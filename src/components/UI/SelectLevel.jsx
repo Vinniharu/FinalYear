@@ -23,7 +23,9 @@ const SelectLevel = (props) => {
           id={props.title}
           className="rounded-md border-2 p-2 text-base"
           onChange={inputValue}
+          required
         >
+          <option selected>Select a level</option>
           <option value="100">100 Level</option>
           <option value="200">200 Level</option>
           <option value="300">300 Level</option>

@@ -28,7 +28,7 @@ const reducer = (state, action) => {
 
 const initialState = {
   code: "",
-  level: "",
+  level: 100,
   title: "",
   note: {},
 };

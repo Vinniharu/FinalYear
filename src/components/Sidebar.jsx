@@ -1,6 +1,8 @@
 import React from "react";
 import LinkCard from "./UI/LinkCard";
 
+const level = [100,200,300,400,500]
+
 const Sidebar = (props) => {
 
   return (
@@ -12,7 +14,10 @@ const Sidebar = (props) => {
       }`}
     >
       <div className="w-full">
-        <LinkCard name="All Books" link="/" />
+        <LinkCard name="All Levels" link="/" />
+        {
+          level.map(item => <LinkCard name={item + " level"} onClick={()=> changeLevelFilter(item)} key={item} link={`/${item}level`}/>)
+        }
       </div>
       <div className="w-full">
         <LinkCard name="Add Note" link="/Add" />
