@@ -46,7 +46,7 @@ const AllBooks = () => {
           <Navbar onClick={onCloseSidebar} />
           <div>
             <Sidebar onClick={sidebarControl} />
-            <div>
+            <div className="overflow-auto">
               {books.map((book) => (
                 <NoteCard
                   key={book.id}

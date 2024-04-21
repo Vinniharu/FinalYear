@@ -28,6 +28,7 @@ const NoteCard = (props) => {
           <Link
             to={link}
             key={Object.keys(props.links)[id]}
+            target="_blank"
             className="z-20 box-border"
           >
             <div className="hover:bg-gray-500 p-2 hover:text-white">

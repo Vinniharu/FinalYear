@@ -4,12 +4,11 @@ import app from "../../../firebase";
 import UploadModal from "./UploadModal";
 
 const UploadItem = (props) => {
-  const [noteURL, setNoteURL] = useState("");
+  const [noteURL, setNoteURL] = useState([]);
   const [fileUpload, setFileUpload] = useState(null);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
-  const [files, setFiles] = useState([])
 
   useEffect(() => {
     if (fileUpload === null) {
@@ -33,7 +32,7 @@ const UploadItem = (props) => {
     const storage = getStorage(app);
     getDownloadURL(ref(storage, `Notes/${props.code}/${props.item}`))
       .then((url) => {
-        setNoteURL(url);
+        setNoteURL([...noteURL, url]);
         setLoading(false);
         setTimeout(() => {
           setVisible(false);
@@ -63,10 +62,14 @@ const UploadItem = (props) => {
           <input
             type="file"
             id={props.name}
-            onChange={(event) => setFileUpload(event.target.files)}
+            onChange={(event) => setFileUpload(event.target.files[0])}
             required
           />
         </div>
+        <p>
+          Add each desired files till satisfied. <br />
+          <span className="font-bold text-red-600">{noteURL.length}</span> files have been added.
+        </p>
       </label>
       {visible ? (
         <UploadModal

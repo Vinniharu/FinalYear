@@ -37,6 +37,7 @@ const AddBook = () => {
   const [sidebarControl, setSidebarControl] = useState(true);
   const [added, setAdded] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [noteUploaded, setNoteUploaded] = useState(false);
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -55,6 +56,7 @@ const AddBook = () => {
     e.preventDefault();
     setAdded(true);
     setVisible(true);
+    setNoteUploaded(true);
     sendToFirebase(uploaded);
     setTimeout(() => {
       setAdded(false);
@@ -62,6 +64,9 @@ const AddBook = () => {
     setTimeout(() => {
       setVisible(false);
     }, 4000);
+    setTimeout(() => {
+      setNoteUploaded(false);
+    }, 8000);
   };
 
   const noteLinkHandler = (note) => {
@@ -97,6 +102,14 @@ const AddBook = () => {
             />
           ) : (
             ""
+          )}
+          {noteUploaded && (
+            <div
+              className="rounded bg-green-300 text-green-600 p-4 font-bold"
+              onClick={() => setNoteUploaded(false)}
+            >
+              {state.code}Note successfully uploaded!
+            </div>
           )}
           <h1 className="font-semibold text-2xl md:text-4xl mb-4">
             Add a new note
