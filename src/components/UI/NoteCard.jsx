@@ -8,7 +8,10 @@ const NoteCard = (props) => {
 
   return (
     <div className="shadow-md box-border border rounded-md w-[100vw]">
-      <div className="p-2 flex items-center justify-between">
+      <div
+        className="p-2 flex items-center justify-between cursor-pointer"
+        onClick={() => setOpen(!open)}
+      >
         <div>
           <h2>Course Title: {props.title}</h2>
           <p>{props.code}</p>

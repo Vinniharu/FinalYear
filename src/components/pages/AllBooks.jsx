@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from "react";
-import fetchDataFromFirebase from "../../../firebase";
+import fetchFromFirebase from "../../../fetchFromFirebase";
 import { InfinitySpin } from "react-loader-spinner";
 import NoteCard from "../UI/NoteCard";
+import Navbar from "../Navbar";
+import Sidebar from "../Sidebar";
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [sidebarControl, setSidebarControl] = useState(true);
+
+  const onCloseSidebar = (sidebar) => {
+    setSidebarControl(sidebar);
+  };
 
   useEffect(() => {
     const fetchBooks = async () => {
       setLoading(true);
       try {
-        const booksData = await fetchDataFromFirebase();
+        const booksData = await fetchFromFirebase();
         setBooks(booksData);
         setLoading(false);
       } catch (error) {
-        console.log("Error fetching books:", error);
         setLoading(false);
+        return <div className="p-4 font-bold text-red-600">{"Error fetching books: " + error}</div>;
       }
     };
 
@@ -26,7 +33,7 @@ const AllBooks = () => {
   return (
     <div className="w-full box-border">
       {loading ? (
-        <div className="fixed bg-white top-0 w-full h-[100vh] flex items-center justify-center">
+        <div className="fixed bg-white top-0 w-full h-[100vh] z-30 flex items-center justify-center">
           <InfinitySpin
             visible={true}
             width="200"
@@ -36,14 +43,20 @@ const AllBooks = () => {
         </div>
       ) : (
         <div>
-          {books.map((book) => (
-            <NoteCard
-              key={book.id}
-              title={book.title}
-              code={book.code}
-              links={book.note}
-            />
-          ))}
+          <Navbar onClick={onCloseSidebar} />
+          <div>
+            <Sidebar onClick={sidebarControl} />
+            <div>
+              {books.map((book) => (
+                <NoteCard
+                  key={book.id}
+                  title={book.title}
+                  code={book.code}
+                  links={book.note}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </div>
