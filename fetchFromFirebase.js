@@ -9,7 +9,6 @@ const fetchFromFirebase = async () => {
   try {
     const snapshot = await getDocs(colRef);
     const data = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Error fetching data from Firebase:", error);

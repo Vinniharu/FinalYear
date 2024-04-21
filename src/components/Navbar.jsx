@@ -6,7 +6,7 @@ import { IoMdClose } from "react-icons/io";
 const Navbar = (props) => {
   const [isOpened, setIsOpened] = useState(false);
 
-  const closeSidebarHandler = () => {
+  const closeSidebarHandler = (change) => {
     setIsOpened(!isOpened);
 
     props.onClick(isOpened);

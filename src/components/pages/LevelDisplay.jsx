@@ -52,7 +52,7 @@ const LevelDisplay = (props) => {
       ) : (
         <div>
           <Navbar onClick={onCloseSidebar} />
-          <div>
+          <div className="relative">
             <Sidebar onClick={sidebarControl} />
             <div className="overflow-auto">
               {books.map((book) => (

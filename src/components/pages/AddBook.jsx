@@ -88,7 +88,7 @@ const AddBook = () => {
   return (
     <div>
       <Navbar onClick={onCloseSidebar} />
-      <div>
+      <div className="relative">
         <Sidebar onClick={sidebarControl} />
         <form
           className="p-4 rounded-lg border-2 m-2 max-w-3xl md:mx-auto"
