@@ -14,10 +14,15 @@ const Sidebar = (props) => {
       }`}
     >
       <div className="w-full">
-        <LinkCard name="All Levels" link="/" />
-        {
-          level.map(item => <LinkCard name={item + " level"} onClick={()=> changeLevelFilter(item)} key={item} link={`/${item}level`}/>)
-        }
+        <LinkCard name="All Levels" link="/Home" />
+        {level.map((item) => (
+          <LinkCard
+            name={item + " level"}
+            onClick={() => changeLevelFilter(item)}
+            key={item}
+            link={`/${item}`}
+          />
+        ))}
       </div>
       <div className="w-full">
         <LinkCard name="Add Note" link="/Add" />

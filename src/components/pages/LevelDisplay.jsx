@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import fetchFromFirebase from "../../../fetchFromFirebase";
 import { InfinitySpin } from "react-loader-spinner";
+import { useParams } from "react-router-dom";
 import NoteCard from "../UI/NoteCard";
 import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
 
-const LevelDisplay = (props) => {
+const LevelDisplay = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sidebarControl, setSidebarControl] = useState(true);
+  let {levelId} = useParams()
 
   const onCloseSidebar = (sidebar) => {
     setSidebarControl(sidebar);
@@ -20,8 +22,8 @@ const LevelDisplay = (props) => {
       try {
         const booksData = await fetchFromFirebase();
         setBooks(
-          props.activeLevel
-            ? booksData.filter((item) => item.level === props.activeLevel)
+          levelId
+            ? booksData.filter((item) => item.level === levelId)
             : booksData
         );
         setLoading(false);
@@ -36,7 +38,7 @@ const LevelDisplay = (props) => {
     };
 
     fetchBooks();
-  }, [props.activeLevel]);
+  }, []);
 
   return (
     <div className="w-full box-border">
