@@ -1,13 +1,15 @@
-import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import AllBooks from './components/pages/AllBooks';
-import AddBook from './components/pages/AddBook';
-import LevelDisplay from './components/pages/LevelDisplay';
-import Landing from './components/pages/Landing';
-import { AuthProvider } from './components/context/auth-context';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./components/context/auth-context";
+
+const Landing = React.lazy(() => import("./components/pages/Landing"));
+const AllBooks = React.lazy(() => import("./components/pages/AllBooks"));
+const AddBook = React.lazy(() => import("./components/pages/AddBook"));
+const LevelDisplay = React.lazy(() =>
+  import("./components/pages/LevelDisplay")
+);
 
 function App() {
-
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -22,4 +24,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
