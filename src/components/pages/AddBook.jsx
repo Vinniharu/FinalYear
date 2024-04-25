@@ -1,7 +1,5 @@
 import React, { useState, useReducer } from "react";
 import sendToFirebase from "../../../sendToFirebase";
-import Navbar from "../Navbar";
-import Sidebar from "../Sidebar";
 import SelectLevel from "../UI/SelectLevel";
 import StringInput from "../UI/StringInput";
 import UploadItem from "../UI/UploadItem";
@@ -34,7 +32,6 @@ const initialState = {
 };
 
 const AddBook = () => {
-  const [sidebarControl, setSidebarControl] = useState(true);
   const [added, setAdded] = useState(false);
   const [visible, setVisible] = useState(false);
   const [noteUploaded, setNoteUploaded] = useState(false);
@@ -46,10 +43,6 @@ const AddBook = () => {
     level: state.level,
     title: state.title,
     note: state.note,
-  };
-
-  const onCloseSidebar = (sidebar) => {
-    setSidebarControl(sidebar);
   };
 
   const formHandler = (e) => {
@@ -87,63 +80,59 @@ const AddBook = () => {
 
   return (
     <div>
-      <Navbar onClick={onCloseSidebar} />
-      <div>
-        <Sidebar onClick={sidebarControl} />
-        <form
-          className="p-4 rounded-lg border-2 m-2 max-w-3xl md:mx-auto"
-          onSubmit={formHandler}
-        >
-          {visible ? (
-            <UploadModal
-              initial="Adding file"
-              end="File has been added"
-              loading={added}
-            />
-          ) : (
-            ""
-          )}
-          {noteUploaded && (
-            <div
-              className="rounded bg-green-300 text-green-600 p-4 font-bold"
-              onClick={() => setNoteUploaded(false)}
-            >
-              {state.code}Note successfully uploaded!
-            </div>
-          )}
-          <h1 className="font-semibold text-2xl md:text-4xl mb-4">
-            Add a new note
-          </h1>
-          <section>
-            <StringInput
-              name="Title of course"
-              title="title"
-              onChange={titleHandler}
-            />
-            <div className="flex items-start justify-between gap-2">
-              <StringInput
-                name="Course Code"
-                title="code"
-                onChange={codeHandler}
-              />
-              <SelectLevel name="Level" title="level" onChange={levelHandler} />
-            </div>
-            <UploadItem
-              name="Note"
-              title="note"
-              onChange={noteLinkHandler}
-              code={state.code}
-              item={state.title}
-            />
-          </section>
-          <button
-            type="submit"
-            className="m-auto block bg-[#0E1C36] text-white font-semibold p-2 rounded-md"
+      <form
+        className="p-4 rounded-lg border-2 m-2 max-w-3xl md:mx-auto"
+        onSubmit={formHandler}
+      >
+        {visible ? (
+          <UploadModal
+            initial="Adding file"
+            end="File has been added"
+            loading={added}
+          />
+        ) : (
+          ""
+        )}
+        {noteUploaded && (
+          <div
+            className="rounded bg-green-300 text-green-600 p-4 mb-[1rem] font-bold"
+            onClick={() => setNoteUploaded(false)}
           >
-            Add Note
-          </button>
-        </form>
-      </div>
+            The {state.code} note has been successfully uploaded!
+          </div>
+        )}
+        <h1 className="font-semibold text-2xl md:text-4xl mb-4">
+          Add a new note
+        </h1>
+        <section>
+          <StringInput
+            name="Title of course"
+            title="title"
+            onChange={titleHandler}
+          />
+          <div className="flex items-start justify-between gap-2">
+            <StringInput
+              name="Course Code"
+              title="code"
+              onChange={codeHandler}
+            />
+            <SelectLevel name="Level" title="level" onChange={levelHandler} />
+          </div>
+          <UploadItem
+            name="Note"
+            title="note"
+            onChange={noteLinkHandler}
+            code={state.code}
+            item={state.title}
+          />
+        </section>
+        <button
+          type="submit"
+          className="m-auto block bg-[#0E1C36] text-white font-semibold p-2 rounded-md"
+        >
+          Add Note
+        </button>
+      </form>
     </div>
   );
 };

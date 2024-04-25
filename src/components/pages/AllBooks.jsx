@@ -2,17 +2,11 @@ import React, { useState, useEffect } from "react";
 import fetchFromFirebase from "../../../fetchFromFirebase";
 import { InfinitySpin } from "react-loader-spinner";
 import NoteCard from "../UI/NoteCard";
-import Navbar from "../Navbar";
-import Sidebar from "../Sidebar";
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sidebarControl, setSidebarControl] = useState(true);
-
-  const onCloseSidebar = (sidebar) => {
-    setSidebarControl(sidebar);
-  };
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -42,21 +36,15 @@ const AllBooks = () => {
           />
         </div>
       ) : (
-        <div>
-          <Navbar onClick={onCloseSidebar} />
-          <div>
-            <Sidebar onClick={sidebarControl} />
-            <div className="overflow-auto">
-              {books.map((book) => (
-                <NoteCard
-                  key={book.id}
-                  title={book.title}
-                  code={book.code}
-                  links={book.note}
-                />
-              ))}
-            </div>
-          </div>
+        <div className="overflow-auto">
+          {books.map((book) => (
+            <NoteCard
+              key={book.id}
+              title={book.title}
+              code={book.code}
+              links={book.note}
+            />
+          ))}
         </div>
       )}
     </div>

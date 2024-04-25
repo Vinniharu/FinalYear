@@ -68,8 +68,17 @@ const UploadItem = (props) => {
         </div>
         <p>
           Add each desired files till satisfied. <br />
-          <span className="font-bold text-red-600">{noteURL.length}</span> files have been added.
+          <span className="font-bold text-red-600">{noteURL.length}</span> files
+          have been added.
         </p>
+        {noteURL.length !== 0 && (
+          <button
+            className="m-auto block bg-red-600 text-white font-semibold p-2 rounded-md"
+            onClick={() => setNoteURL([])}
+          >
+            Clear
+          </button>
+        )}
       </label>
       {visible ? (
         <UploadModal

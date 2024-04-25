@@ -13,7 +13,7 @@ const Navbar = (props) => {
   };
 
   return (
-    <div className="box-border p-4 bg-[#0E1C36] w-full text-white h-[10vh] flex items-center justify-between">
+    <div className="box-border p-4 bg-[#0E1C36] w-full text-white h-[10vh] flex items-center justify-between sticky top-0">
       <div>
         <Link to={"/"}>
           <h1 className="text-3xl font-extrabold">StudyHere</h1>
