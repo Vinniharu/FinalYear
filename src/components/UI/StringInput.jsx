@@ -8,7 +8,7 @@ const StringInput = (props) => {
    }
 
    useEffect(() => {
-     props.onChange(value.toUpperCase());
+     props.onChange(value);
    }, [value]);
 
   return (
@@ -19,7 +19,7 @@ const StringInput = (props) => {
       {props.name}
       <div className="rounded-md border-2 p-2 text-base">
         <input
-          type="text"
+          type={props.type}
           placeholder={props.name}
           className="w-full outline-none appearance-none"
           value={value}

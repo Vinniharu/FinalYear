@@ -67,7 +67,7 @@ const AddBook = () => {
   };
 
   const titleHandler = (title) => {
-    dispatch({ type: "title", payload: title });
+    dispatch({ type: "title", payload: title.toUpperCase() });
   };
 
   const levelHandler = (level) => {
@@ -75,7 +75,7 @@ const AddBook = () => {
   };
 
   const codeHandler = (code) => {
-    dispatch({ type: "code", payload: code });
+    dispatch({ type: "code", payload: code.toUpperCase() });
   };
 
   return (

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import fetchFromFirebase from "../../../fetchFromFirebase";
-import { InfinitySpin } from "react-loader-spinner";
 import NoteCard from "../UI/NoteCard";
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [sidebarControl, setSidebarControl] = useState(true);
+
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -26,16 +25,6 @@ const AllBooks = () => {
 
   return (
     <div className="w-full box-border">
-      {loading ? (
-        <div className="fixed bg-white top-0 w-full h-[100vh] z-30 flex items-center justify-center">
-          <InfinitySpin
-            visible={true}
-            width="200"
-            color="#0E1C36"
-            ariaLabel="infinity-spin-loading"
-          />
-        </div>
-      ) : (
         <div className="overflow-auto">
           {books.map((book) => (
             <NoteCard
@@ -46,7 +35,6 @@ const AllBooks = () => {
             />
           ))}
         </div>
-      )}
     </div>
   );
 };

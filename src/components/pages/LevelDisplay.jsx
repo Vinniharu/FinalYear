@@ -7,7 +7,6 @@ import NoteCard from "../UI/NoteCard";
 const LevelDisplay = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [sidebarControl, setSidebarControl] = useState(true);
   let { levelId } = useParams();
 
   useEffect(() => {
@@ -36,17 +35,7 @@ const LevelDisplay = () => {
 
   return (
     <div className="w-full box-border">
-      {loading ? (
-        <div className="fixed bg-white top-0 w-full h-[100vh] z-30 flex items-center justify-center">
-          <InfinitySpin
-            visible={true}
-            width="200"
-            color="#0E1C36"
-            ariaLabel="infinity-spin-loading"
-          />
-        </div>
-      ) : (
-        <div className="overflow-auto">
+      <div className="overflow-auto">
           {books.map((book) => (
             <NoteCard
               key={book.id}
@@ -56,7 +45,6 @@ const LevelDisplay = () => {
             />
           ))}
         </div>
-      )}
     </div>
   );
 };

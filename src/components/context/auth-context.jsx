@@ -1,14 +1,22 @@
-import { createContext } from "react";
-import React, { useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 const AuthContext = createContext({
-  isLoggedIn: true,
+  isLoggedIn: false,
   onLogIn: () => {},
   onLogOut: () => {},
+  sidebarOpen: false
 });
 
 export const AuthProvider = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    const auth = localStorage.getItem("Auth");
+    return auth ? JSON.parse(auth) : false;
+  });
+  const [sideOpen, setSideOpen] = useState(false)
+
+  useEffect(() => {
+    localStorage.setItem("Auth", JSON.stringify(isLoggedIn));
+  }, [isLoggedIn]);
 
   const logInHandler = () => {
     setIsLoggedIn(true);
@@ -18,14 +26,15 @@ export const AuthProvider = (props) => {
     setIsLoggedIn(false);
   };
 
+  const contextValue = {
+    isLoggedIn,
+    onLogIn: logInHandler,
+    onLogOut: logOutHandler,
+    sidebarOpen: false,
+  };
+
   return (
-    <AuthContext.Provider
-      value={{
-        isLoggedIn,
-        onLogIn: logInHandler,
-        onLogOut: logOutHandler,
-      }}
-    >
+    <AuthContext.Provider value={contextValue}>
       {props.children}
     </AuthContext.Provider>
   );

@@ -25,7 +25,7 @@ const SelectLevel = (props) => {
           onChange={inputValue}
           required
         >
-          <option selected>Select a level</option>
+          <option>Select a level</option>
           <option value="100">100 Level</option>
           <option value="200">200 Level</option>
           <option value="300">300 Level</option>

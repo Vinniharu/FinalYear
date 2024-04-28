@@ -1,27 +1,24 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { AuthProvider } from "./components/context/auth-context";
-
-const Landing = React.lazy(() => import("./components/pages/Landing"));
-const AllBooks = React.lazy(() => import("./components/pages/AllBooks"));
-const AddBook = React.lazy(() => import("./components/pages/AddBook"));
-const LevelDisplay = React.lazy(() =>
-  import("./components/pages/LevelDisplay")
-);
-const MainPage = React.lazy(() => import('./components/pages/MainPage'))
+import Landing from "./components/pages/Landing";
+import AllBooks from "./components/pages/AllBooks";
+import AddBook from "./components/pages/AddBook";
+import LevelDisplay from "./components/pages/LevelDisplay";
+import MainPage from "./components/pages/MainPage";
+import AuthForm from "./components/pages/AuthForm";
 
 function App() {
+  
   return (
-    <AuthProvider>
       <Routes>
         <Route path="/" element={<MainPage />}>
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<AllBooks />} />
           <Route path="/add" element={<AddBook />} />
           <Route path="/:levelId" element={<LevelDisplay />} />
+          <Route path="/auth" element={<AuthForm/>} />
         </Route>
       </Routes>
-    </AuthProvider>
   );
 }
 
