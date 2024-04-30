@@ -3,12 +3,14 @@ import LinkCard from "./UI/LinkCard";
 import { useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 import NavToggle from "./context/nav-context";
+import AuthContext from "./context/auth-context";
 
 const level = [100, 200, 300, 400, 500];
 
 const Sidebar = () => {
   const navigate = useNavigate()
   const nav = useContext(NavToggle)
+  const authcxt = useContext(AuthContext)
 
   const logOutHandler = () => {
     authcxt.onLogOut()
