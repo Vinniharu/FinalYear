@@ -8,7 +8,8 @@ import {
 import app from "../../../firebase";
 import AuthContext from "../context/auth-context";
 import { InfinitySpin } from "react-loader-spinner";
-import userData from "../../../UserFirebase";
+import writeUserData from "../../../UserFirebase";
+import fetchUserData from "../../../fetchUserData";
 import { useNavigate } from "react-router-dom";
 
 const AuthForm = () => {
@@ -45,6 +46,7 @@ const AuthForm = () => {
           const user = userCredential.user;
           authContext.onLogIn()
           navigate("/home");
+          fetchUserData(user.uid);
           setLoading(false);
         })
         .catch((error) => {
@@ -57,8 +59,11 @@ const AuthForm = () => {
       createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
         .then((userCredential) => {
           const user = userCredential.user;
-          authContext.onLogIn;
+          authContext.onLogIn();
           navigate("/home");
+          writeUserData(user.uid, admin);
+          fetchUserData(user.uid);
+          
           setLoading(false);
         })
         .catch((error) => {
@@ -76,7 +81,7 @@ const AuthForm = () => {
       onSubmit={submitHandler}
     >
       <h1 className="font-semibold text-2xl md:text-4xl mb-4">
-        {isLogin ? "Login Page" : "Sign In page"}
+        {isLogin ? "Login Page" : "Sign up page"}
       </h1>
       <StringInput
         title="email"

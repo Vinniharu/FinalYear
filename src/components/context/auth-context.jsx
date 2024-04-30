@@ -4,7 +4,6 @@ const AuthContext = createContext({
   isLoggedIn: false,
   onLogIn: () => {},
   onLogOut: () => {},
-  sidebarOpen: false
 });
 
 export const AuthProvider = (props) => {
@@ -12,7 +11,6 @@ export const AuthProvider = (props) => {
     const auth = localStorage.getItem("Auth");
     return auth ? JSON.parse(auth) : false;
   });
-  const [sideOpen, setSideOpen] = useState(false)
 
   useEffect(() => {
     localStorage.setItem("Auth", JSON.stringify(isLoggedIn));
@@ -24,13 +22,13 @@ export const AuthProvider = (props) => {
 
   const logOutHandler = () => {
     setIsLoggedIn(false);
+    localStorage.removeItem("userData");
   };
 
   const contextValue = {
     isLoggedIn,
     onLogIn: logInHandler,
     onLogOut: logOutHandler,
-    sidebarOpen: false,
   };
 
   return (
