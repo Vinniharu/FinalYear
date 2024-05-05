@@ -11,6 +11,7 @@ import { InfinitySpin } from "react-loader-spinner";
 import writeUserData from "../../../UserFirebase";
 import fetchUserData from "../../../fetchUserData";
 import { useNavigate } from "react-router-dom";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 const AuthForm = () => {
   const authContext = useContext(AuthContext);
@@ -19,6 +20,7 @@ const AuthForm = () => {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [admin, setAdmin] = useState(false);
+  const [errorCode, setErrorCode] = useState("");
   const navigate = useNavigate();
 
   const emailInputHandler = (value) => {
@@ -44,15 +46,13 @@ const AuthForm = () => {
       signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
         .then((userCredential) => {
           const user = userCredential.user;
-          authContext.onLogIn()
+          authContext.onLogIn();
           navigate("/home");
           fetchUserData(user.uid);
           setLoading(false);
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
+          setErrorCode(error.code);
           setLoading(false);
         });
     } else {
@@ -63,13 +63,11 @@ const AuthForm = () => {
           navigate("/home");
           writeUserData(user.uid, admin);
           fetchUserData(user.uid);
-          
+
           setLoading(false);
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
+          setErrorCode(error.code);
           setLoading(false);
         });
     }
@@ -80,6 +78,24 @@ const AuthForm = () => {
       className="p-4 rounded-lg border-2 m-2 max-w-3xl md:mx-auto"
       onSubmit={submitHandler}
     >
+      {errorCode ? (
+        <div className="p-2 rounded bg-red-600 text-white">
+          <span className="flex items-start justify-end">
+            <button
+              className="text-red-400 text-lg"
+              onClick={() => {
+                setErrorCode("");
+                setErrorMessage("");
+              }}
+            >
+              <IoCloseCircleOutline />
+            </button>
+          </span>
+          <h1 className="text-xl font-bold">{errorCode}</h1>
+        </div>
+      ) : (
+        ""
+      )}
       <h1 className="font-semibold text-2xl md:text-4xl mb-4">
         {isLogin ? "Login Page" : "Sign up page"}
       </h1>
@@ -114,7 +130,7 @@ const AuthForm = () => {
         onClick={isLoginToggle}
         className="text-[#0E1C36] text-lg font-semibold cursor-pointer block mb-[2rem]"
       >
-        {isLogin ? "Create an account here" : "Already have an account?" }
+        {isLogin ? "Create an account here" : "Already have an account?"}
       </span>
       {loading ? (
         <button

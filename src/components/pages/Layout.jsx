@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
+import AuthContext from "../context/auth-context";
 
 const Layout = () => {
-
-  const controlFunction = () => {
-    setSidebarControl(!sidebarControl)
-  }
+  const auth = useContext(AuthContext)
 
   return (
     <div>
@@ -15,8 +13,7 @@ const Layout = () => {
       <div className="flex items-center relative box-border w-full justify-start h-fit overflow-x-hidden mt-4 mb-[2rem]">
         <Sidebar/>
         <Outlet />
-      </div>function
-      {console.log(auth.isLoggedIn)}
+      </div>
     </div>
   );
 };
